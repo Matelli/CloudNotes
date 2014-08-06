@@ -48,6 +48,7 @@
 		0C6171C7199251E4000E9B50 /* CloudNotesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CloudNotesTests-Info.plist"; sourceTree = "<group>"; };
 		0C6171C9199251E4000E9B50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0C6171CB199251E4000E9B50 /* CloudNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudNotesTests.m; sourceTree = "<group>"; };
+		0C6171D51992525A000E9B50 /* CloudNotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CloudNotes.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +108,7 @@
 		0C6171AC199251E4000E9B50 /* CloudNotes */ = {
 			isa = PBXGroup;
 			children = (
+				0C6171D51992525A000E9B50 /* CloudNotes.entitlements */,
 				0C6171B5199251E4000E9B50 /* CNAppDelegate.h */,
 				0C6171B6199251E4000E9B50 /* CNAppDelegate.m */,
 				0C6171B8199251E4000E9B50 /* Images.xcassets */,
@@ -192,6 +194,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Mistra;
 				TargetAttributes = {
+					0C6171A2199251E4000E9B50 = {
+						DevelopmentTeam = Z9AH4KN35R;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
 					0C6171BD199251E4000E9B50 = {
 						TestTargetID = 0C6171A2199251E4000E9B50;
 					};
@@ -358,6 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = CloudNotes/CloudNotes.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudNotes/CloudNotes-Prefix.pch";
 				INFOPLIST_FILE = "CloudNotes/CloudNotes-Info.plist";
@@ -371,6 +382,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = CloudNotes/CloudNotes.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudNotes/CloudNotes-Prefix.pch";
 				INFOPLIST_FILE = "CloudNotes/CloudNotes-Info.plist";

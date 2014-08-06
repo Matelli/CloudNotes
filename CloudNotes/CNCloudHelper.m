@@ -44,7 +44,25 @@
     }
 }
 
+#pragma mark - helper
 
+- (void) retrieveIcloudContainerURL:(void(^)(NSURL * urlForIcloudContainer))completion
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        id container = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(completion)
+                completion(container);
+        });
+    });
+}
+
+- (NSString *) generateRadomFileName
+{
+    NSString * timeStamp = [[NSDate date] description];
+    NSString * randomNumber = [@(arc4random() % 100) description];
+    return [NSString stringWithFormat:@"%@_%@.not", timeStamp, randomNumber];
+}
 
 
 #pragma mark - token storage

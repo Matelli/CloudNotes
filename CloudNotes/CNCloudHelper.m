@@ -9,10 +9,12 @@
 #import "CNCloudHelper.h"
 #import "CNNoteDocument.h"
 
+@interface CNCloudHelper ()
+
+@property (strong, nonatomic) NSMetadataQuery * query;
+
+@end
 @implementation CNCloudHelper
-{
-    NSMetadataQuery * _query;
-}
 
 + (instancetype)sharedInstance
 {
@@ -21,6 +23,14 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [self new];
+        
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:sharedInstance
+         selector:@selector(queryDidFinishGathering)
+         name:NSMetadataQueryDidFinishGatheringNotification
+         object:nil];
+        
     });
     
     return sharedInstance;
@@ -51,20 +61,26 @@
 
 - (void)insertNewDocument:(void (^)(id document))completion
 {
-    NSString * documentName = @"toto.not"; //[self generateRadomFileName];
+    NSString * documentName = [self generateRadomFileName];
+    
+    NSLog(@"Trying to create %@", documentName);
     
     [self retrieveIcloudContainerURL:^(NSURL *urlForIcloudContainer) {
         
-        NSURL * fileURL = [urlForIcloudContainer URLByAppendingPathComponent:documentName
-                                                                 isDirectory:NO];
+        NSURL * fileURL = [urlForIcloudContainer URLByAppendingPathComponent:@"Documents"];
+        fileURL = [fileURL URLByAppendingPathComponent:documentName];
         
         id document = [[CNNoteDocument alloc]initWithFileURL:fileURL];
         
         [document saveToURL:fileURL
            forSaveOperation:UIDocumentSaveForCreating
           completionHandler:^(BOOL success) {
+              
               [document openWithCompletionHandler:^(BOOL success) {
-                  completion(document);
+                  if(success)
+                  {
+                      completion(document);
+                  }
               }];
           }];
     }];
@@ -73,52 +89,40 @@
 
 #pragma mark - monitoriung cloud acitivties
 
-- (NSMetadataQuery *)documentQuery
+- (NSMetadataQuery *)query
 {
-    
     if(!_query)
     {
-        _query = [[NSMetadataQuery alloc] init];
+        _query = [NSMetadataQuery new];
+        _query.searchScopes = @[NSMetadataQueryUbiquitousDocumentsScope];
         
-        // Search documents subdir only
-        [_query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
+        NSString * fileFormat = @"*.not";
         
-        // Recherche tout les documents .not
-        NSString * filePattern = @"*.*";
-        [_query setPredicate:[NSPredicate predicateWithFormat:@"%K LIKE %@",
-                                      NSMetadataItemFSNameKey, filePattern]];
+        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K LIKE %@", NSMetadataItemFSNameKey, fileFormat];
         
+        _query.predicate = predicate;
     }
-    return _query;
     
+    return _query;
 }
-
 
 - (void) startMonitoringCloud
 {
     [self stopMonitoringCloud];
     
-    [self.documentQuery startQuery];
+    [self.query startQuery];
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(queryDidFinishGathering)
-     name:NSMetadataQueryDidFinishGatheringNotification
-     object:nil];
+    
 }
 
 - (void) stopMonitoringCloud
 {
-    [_query stopQuery];
-    _query = nil;
-    
-    @try {
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:nil];
+    if(_query)
+    {
+        [self.query disableUpdates];
+        [self.query stopQuery];
+        self.query = nil;
     }
-    @catch (NSException *exception) {
-        // do nothing
-    }
-    
 }
 
 #pragma mark - iCloud CallBack
@@ -132,7 +136,8 @@
         CNNoteDocument *doc = [[CNNoteDocument alloc] initWithFileURL:url];
         [documents addObject:doc];
     }
-    [self.delegate cloudHelper:self didFindDocuments:documents];
+    [self.delegate cloudHelper:self didFindDocuments:[documents copy]];
+    [self.query enableUpdates];
 }
 
 
@@ -141,8 +146,10 @@
 - (void) retrieveIcloudContainerURL:(void(^)(NSURL * urlForIcloudContainer))completion
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        id container = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:nil];
+        id manager = [NSFileManager defaultManager];
+        NSURL * container = [manager URLForUbiquityContainerIdentifier:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             if(completion)
                 completion(container);
         });
@@ -152,8 +159,15 @@
 - (NSString *) generateRadomFileName
 {
     NSString * timeStamp = [[NSDate date] description];
+    timeStamp = [timeStamp stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    timeStamp = [timeStamp stringByReplacingOccurrencesOfString:@":" withString:@""];
+    timeStamp = [timeStamp stringByReplacingOccurrencesOfString:@" " withString:@""];
+    timeStamp = [timeStamp stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    timeStamp = [timeStamp substringFromIndex:4];
+    timeStamp = [timeStamp substringToIndex:10];
+    
     NSString * randomNumber = [@(arc4random() % 100) description];
-    return [NSString stringWithFormat:@"%@_%@.not", timeStamp, randomNumber];
+    return [NSString stringWithFormat:@"%@%@.not", timeStamp, randomNumber];
 }
 
 

@@ -57,6 +57,14 @@
 
 - (NSString *)description
 {
-    return self.text;
+    if(self.text)
+    {
+        return self.text;
+
+    }
+    else
+    {
+        return @"not opened yet";
+    }
 }
 @end

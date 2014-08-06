@@ -18,6 +18,9 @@
 @end
 
 @implementation CNNotesTableViewController
+{
+    NSMutableDictionary * _openOperations;
+}
 
 #pragma mark - Lazy getter
 
@@ -39,6 +42,7 @@
 
 - (void)viewDidLoad
 {
+    _openOperations  = [NSMutableDictionary new];
     
     UIBarButtonItem * insertButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewNote)];
     self.navigationItem.rightBarButtonItem = insertButton;
@@ -91,7 +95,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id notesDocument = self.notesDocuments[indexPath.row];
+    CNNoteDocument * notesDocument = self.notesDocuments[indexPath.row];
     
     // Recupération de la cellule
     static NSString * CellIdentifier = @"Cell";
@@ -103,11 +107,35 @@
     }
     
     // Configuration de la cellule
-    cell.textLabel.text = [notesDocument description];
+    if(notesDocument.text)
+    {
+        cell.textLabel.text = [notesDocument text];
+    }
+    else
+    {
+        cell.textLabel.text = @"...";
+        [self openDocumentForCellAtIndexPath:indexPath];
+    }
     
     return cell;
 }
 
+- (void) openDocumentForCellAtIndexPath:(NSIndexPath *)indexPAth
+{
+    CNNoteDocument * document = self.notesDocuments[indexPAth.row];
+    
+    NSBlockOperation * operation = [NSBlockOperation blockOperationWithBlock:^{
+        UITableViewCell * visibleCell = [self.tableView cellForRowAtIndexPath:indexPAth];
+        visibleCell.textLabel.text = document.text;
+        [visibleCell setNeedsLayout];
+        [_openOperations removeObjectForKey:indexPAth];
+    }];
+    _openOperations[indexPAth] = operation;
+    
+    [document openWithCompletionHandler:^(BOOL success) {
+        [[NSOperationQueue mainQueue]addOperation:operation];
+    }];
+}
 #pragma mark - iCNCloudHelperDelegate
 
 - (void)cloudHelper:(id)sender didFindDocuments:(NSArray *)documents

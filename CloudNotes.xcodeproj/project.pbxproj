@@ -19,6 +19,7 @@
 		0C6171C2199251E4000E9B50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6171AA199251E4000E9B50 /* UIKit.framework */; };
 		0C6171CA199251E4000E9B50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C6171C8199251E4000E9B50 /* InfoPlist.strings */; };
 		0C6171CC199251E4000E9B50 /* CloudNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6171CB199251E4000E9B50 /* CloudNotesTests.m */; };
+		0C6171D8199252D2000E9B50 /* CNCloudHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6171D7199252D2000E9B50 /* CNCloudHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		0C6171C9199251E4000E9B50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0C6171CB199251E4000E9B50 /* CloudNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudNotesTests.m; sourceTree = "<group>"; };
 		0C6171D51992525A000E9B50 /* CloudNotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CloudNotes.entitlements; sourceTree = "<group>"; };
+		0C6171D6199252D2000E9B50 /* CNCloudHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNCloudHelper.h; sourceTree = "<group>"; };
+		0C6171D7199252D2000E9B50 /* CNCloudHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNCloudHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				0C6171D51992525A000E9B50 /* CloudNotes.entitlements */,
 				0C6171B5199251E4000E9B50 /* CNAppDelegate.h */,
 				0C6171B6199251E4000E9B50 /* CNAppDelegate.m */,
+				0C6171D6199252D2000E9B50 /* CNCloudHelper.h */,
+				0C6171D7199252D2000E9B50 /* CNCloudHelper.m */,
 				0C6171B8199251E4000E9B50 /* Images.xcassets */,
 				0C6171AD199251E4000E9B50 /* Supporting Files */,
 			);
@@ -250,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C6171D8199252D2000E9B50 /* CNCloudHelper.m in Sources */,
 				0C6171B3199251E4000E9B50 /* main.m in Sources */,
 				0C6171B7199251E4000E9B50 /* CNAppDelegate.m in Sources */,
 			);
@@ -372,6 +378,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudNotes/CloudNotes-Prefix.pch";
 				INFOPLIST_FILE = "CloudNotes/CloudNotes-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -386,6 +393,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudNotes/CloudNotes-Prefix.pch";
 				INFOPLIST_FILE = "CloudNotes/CloudNotes-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

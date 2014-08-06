@@ -20,6 +20,9 @@
 
 - (void) retrieveUserAccountToken:(void(^)(BOOL hasAccount, BOOL accountHasChanged))completion;
 
+
+- (void)insertNewDocument:(void (^)(id document))completion;
+
 - (void) startMonitoringCloud;
 - (void) stopMonitoringCloud;
 

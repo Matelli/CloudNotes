@@ -20,18 +20,31 @@
                                                           options:NSJSONReadingAllowFragments
                                                             error:outError];
     self.text = serializedObject[CNNoteDocumentSerializedText];
-    self.lastModified = serializedObject[CNNoteDocumentSerializedTimeStamp];
+    NSNumber * timeStamp = serializedObject[CNNoteDocumentSerializedTimeStamp];
+    self.lastModified = [NSDate dateWithTimeIntervalSince1970:timeStamp.doubleValue];
     
+    if(self.text == nil)
+    {
+        self.text = @"vide";
+    }
     return outError == nil;
 }
 
 // ecriture
 - (id)contentsForType:(NSString *)typeName error:(NSError *__autoreleasing *)outError
 {
+    if(self.text == nil)
+    {
+        self.text = @"empty";
+    }
+    if(!self.lastModified)
+    {
+        self.lastModified = [NSDate date];
+    }
     
     NSDictionary * serializedObject = @{
                                         CNNoteDocumentSerializedText : self.text,
-                                        CNNoteDocumentSerializedTimeStamp : self.lastModified
+                                        CNNoteDocumentSerializedTimeStamp : @(self.lastModified.timeIntervalSince1970)
                                         };
     
     id serializedData = [NSJSONSerialization dataWithJSONObject:serializedObject
@@ -42,4 +55,8 @@
     
 }
 
+- (NSString *)description
+{
+    return self.text;
+}
 @end

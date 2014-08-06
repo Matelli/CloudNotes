@@ -49,9 +49,9 @@
 
 #pragma mark - CRUD operation
 
-- (void)insertNewDocument:(void (^)(CNNoteDocument *))completion
+- (void)insertNewDocument:(void (^)(id document))completion
 {
-    NSString * documentName = [self generateRadomFileName];
+    NSString * documentName = @"toto.not"; //[self generateRadomFileName];
     
     [self retrieveIcloudContainerURL:^(NSURL *urlForIcloudContainer) {
         
@@ -63,7 +63,9 @@
         [document saveToURL:fileURL
            forSaveOperation:UIDocumentSaveForCreating
           completionHandler:^(BOOL success) {
-              completion(document);
+              [document openWithCompletionHandler:^(BOOL success) {
+                  completion(document);
+              }];
           }];
     }];
     
@@ -82,7 +84,7 @@
         [_query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
         
         // Recherche tout les documents .not
-        NSString * filePattern = @"*.not";
+        NSString * filePattern = @"*.*";
         [_query setPredicate:[NSPredicate predicateWithFormat:@"%K LIKE %@",
                                       NSMetadataItemFSNameKey, filePattern]];
         
@@ -117,6 +119,20 @@
         // do nothing
     }
     
+}
+
+#pragma mark - iCloud CallBack
+
+- (void) queryDidFinishGathering
+{
+    NSMutableArray * documents = [[NSMutableArray alloc]init];
+    for (NSMetadataItem * item in _query.results)
+    {
+        NSURL *url = [item valueForAttribute:NSMetadataItemURLKey];
+        CNNoteDocument *doc = [[CNNoteDocument alloc] initWithFileURL:url];
+        [documents addObject:doc];
+    }
+    [self.delegate cloudHelper:self didFindDocuments:documents];
 }
 
 

@@ -8,8 +8,9 @@
 
 #import "CNNotesTableViewController.h"
 #import "CNCloudHelper.h"
+#import "CNNoteDocument.h"
 
-@interface CNNotesTableViewController ()
+@interface CNNotesTableViewController () <CNCloudHelperDelegate>
 
 @property (strong, nonatomic) NSArray * notesDocuments;
 @property (readonly) CNCloudHelper * service;
@@ -25,6 +26,15 @@
     return [CNCloudHelper sharedInstance];
 }
 
+- (NSArray *)notesDocuments
+{
+    if(!_notesDocuments)
+    {
+        self.notesDocuments = [NSArray new];
+    }
+    return _notesDocuments;
+}
+
 #pragma mark - View LifeCycle
 
 - (void)viewDidLoad
@@ -36,7 +46,8 @@
     [self.service retrieveUserAccountToken:^(BOOL hasAccount, BOOL accountHasChanged) {
         if(hasAccount)
         {
-            NSLog(@"icloud ok");
+            [self.service startMonitoringCloud];
+            self.service.delegate = self;
         }
         else
         {
@@ -45,13 +56,21 @@
                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
         }
     }];
+    
+    
+    
 }
 
 #pragma mark - user Interraction
 
 - (void) insertNewNote
 {
-    
+    [self.service insertNewDocument:^(CNNoteDocument * document) {
+        document.text = @"new";
+        document.lastModified = [NSDate date];
+        self.notesDocuments = [self.notesDocuments arrayByAddingObject:document];
+        [self.tableView reloadData];
+    }];
 }
 
 
@@ -65,7 +84,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    self.title = [NSString stringWithFormat:@"%d items", self.notesDocuments.count];
     return self.notesDocuments.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,5 +106,14 @@
     cell.textLabel.text = [notesDocument description];
     
     return cell;
+}
+
+#pragma mark - iCNCloudHelperDelegate
+
+- (void)cloudHelper:(id)sender didFindDocuments:(NSArray *)documents
+{
+    self.notesDocuments = documents;
+    
+    [self.tableView reloadData];
 }
 @end

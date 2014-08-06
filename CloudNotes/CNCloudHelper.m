@@ -7,6 +7,7 @@
 //
 
 #import "CNCloudHelper.h"
+#import "CNNoteDocument.h"
 
 @implementation CNCloudHelper
 
@@ -21,5 +22,46 @@
     
     return sharedInstance;
 }
+
+- (void) retrieveUserAccountToken:(void(^)(BOOL hasAccount, BOOL accountHasChanged))completion
+{
+    
+    // Récupere le token
+    id token = [[NSFileManager defaultManager] ubiquityIdentityToken];
+    
+    if(!token)
+    {
+        completion(NO, NO);
+    }
+    else if([token isEqual:[self storedToken]]) // Utiliser isEqual: pour comparer 2 token
+    {
+        completion(YES, NO);
+    }
+    else
+    {
+        [self setStoredToken:token]; // Cacher le token pour pouvoir le comparer prochainement
+        completion(YES, YES);
+    }
+}
+
+
+
+
+#pragma mark - token storage
+
+#define kIcloudServiceTokenStorage  @"fr.matelli.icloudService.token"
+
+- (id) storedToken
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kIcloudServiceTokenStorage];
+}
+
+- (void) setStoredToken:(id)token
+{
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:kIcloudServiceTokenStorage];
+    [[NSUserDefaults standardUserDefaults]setObject:token forKey:kIcloudServiceTokenStorage];
+}
+
+
 
 @end

@@ -7,14 +7,23 @@
 //
 
 #import "CNNotesTableViewController.h"
+#import "CNCloudHelper.h"
 
 @interface CNNotesTableViewController ()
 
 @property (strong, nonatomic) NSArray * notesDocuments;
+@property (readonly) CNCloudHelper * service;
 
 @end
 
 @implementation CNNotesTableViewController
+
+#pragma mark - Lazy getter
+
+- (CNCloudHelper *)service
+{
+    return [CNCloudHelper sharedInstance];
+}
 
 #pragma mark - View LifeCycle
 
@@ -23,6 +32,19 @@
     
     UIBarButtonItem * insertButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewNote)];
     self.navigationItem.rightBarButtonItem = insertButton;
+    
+    [self.service retrieveUserAccountToken:^(BOOL hasAccount, BOOL accountHasChanged) {
+        if(hasAccount)
+        {
+            NSLog(@"icloud ok");
+        }
+        else
+        {
+            [[[UIAlertView alloc]initWithTitle:@"iCloud est necessaire pour fonctionner"
+                                       message:@"So go and get it"
+                                      delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+        }
+    }];
 }
 
 #pragma mark - user Interraction

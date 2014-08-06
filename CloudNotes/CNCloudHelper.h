@@ -12,4 +12,6 @@
 
 + (instancetype)sharedInstance;
 
+- (void) retrieveUserAccountToken:(void(^)(BOOL hasAccount, BOOL accountHasChanged))completion;
+
 @end

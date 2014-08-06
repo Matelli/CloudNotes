@@ -7,6 +7,7 @@
 //
 
 #import "CNAppDelegate.h"
+#import "CNNotesTableViewController.h"
 
 @implementation CNAppDelegate
 
@@ -16,6 +17,11 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    
+    id rootViewController = [CNNotesTableViewController new];
+    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:rootViewController];
+    self.window.rootViewController = nav;
     return YES;
 }
 

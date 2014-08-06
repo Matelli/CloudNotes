@@ -22,6 +22,7 @@
 		0C6171D8199252D2000E9B50 /* CNCloudHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6171D7199252D2000E9B50 /* CNCloudHelper.m */; };
 		0C6171DB19925A46000E9B50 /* CNNotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6171DA19925A46000E9B50 /* CNNotesTableViewController.m */; };
 		0C6171DE19925DAD000E9B50 /* CNNoteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6171DD19925DAD000E9B50 /* CNNoteDocument.m */; };
+		0C6171E119928776000E9B50 /* CNNoteDocument+UIAlertViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6171E019928776000E9B50 /* CNNoteDocument+UIAlertViewDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		0C6171DA19925A46000E9B50 /* CNNotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNNotesTableViewController.m; sourceTree = "<group>"; };
 		0C6171DC19925DAD000E9B50 /* CNNoteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNNoteDocument.h; sourceTree = "<group>"; };
 		0C6171DD19925DAD000E9B50 /* CNNoteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNNoteDocument.m; sourceTree = "<group>"; };
+		0C6171DF19928776000E9B50 /* CNNoteDocument+UIAlertViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CNNoteDocument+UIAlertViewDelegate.h"; sourceTree = "<group>"; };
+		0C6171E019928776000E9B50 /* CNNoteDocument+UIAlertViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CNNoteDocument+UIAlertViewDelegate.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				0C6171DD19925DAD000E9B50 /* CNNoteDocument.m */,
 				0C6171D919925A46000E9B50 /* CNNotesTableViewController.h */,
 				0C6171DA19925A46000E9B50 /* CNNotesTableViewController.m */,
+				0C6171DF19928776000E9B50 /* CNNoteDocument+UIAlertViewDelegate.h */,
+				0C6171E019928776000E9B50 /* CNNoteDocument+UIAlertViewDelegate.m */,
 				0C6171B8199251E4000E9B50 /* Images.xcassets */,
 				0C6171AD199251E4000E9B50 /* Supporting Files */,
 			);
@@ -265,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C6171E119928776000E9B50 /* CNNoteDocument+UIAlertViewDelegate.m in Sources */,
 				0C6171DB19925A46000E9B50 /* CNNotesTableViewController.m in Sources */,
 				0C6171D8199252D2000E9B50 /* CNCloudHelper.m in Sources */,
 				0C6171B3199251E4000E9B50 /* main.m in Sources */,

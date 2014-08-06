@@ -136,6 +136,39 @@
         [[NSOperationQueue mainQueue]addOperation:operation];
     }];
 }
+
+
+NSIndexPath * _ip;
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    _ip = indexPath;
+    
+    CNNoteDocument * doc = self.notesDocuments[indexPath.row];
+    
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Entrer le text" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [[alert textFieldAtIndex:0] setText:doc.text];
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    CNNoteDocument * doc = self.notesDocuments[_ip.row];
+    
+    if(buttonIndex != alertView.cancelButtonIndex)
+    {
+        doc.text = [[alertView textFieldAtIndex:0] text];
+        [doc saveToURL:doc.fileURL
+       forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+           [self.tableView reloadRowsAtIndexPaths:@[_ip] withRowAnimation:UITableViewRowAnimationNone];
+           _ip = nil;
+       }];
+        
+    }
+}
+
 #pragma mark - iCNCloudHelperDelegate
 
 - (void)cloudHelper:(id)sender didFindDocuments:(NSArray *)documents

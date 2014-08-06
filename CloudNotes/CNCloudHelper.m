@@ -92,6 +92,33 @@
 }
 
 
+- (void) startMonitoringCloud
+{
+    [self stopMonitoringCloud];
+    
+    [self.documentQuery startQuery];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(queryDidFinishGathering)
+     name:NSMetadataQueryDidFinishGatheringNotification
+     object:nil];
+}
+
+- (void) stopMonitoringCloud
+{
+    [_query stopQuery];
+    _query = nil;
+    
+    @try {
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:nil];
+    }
+    @catch (NSException *exception) {
+        // do nothing
+    }
+    
+}
+
 
 #pragma mark - helper
 

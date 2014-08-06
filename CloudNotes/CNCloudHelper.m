@@ -44,6 +44,28 @@
     }
 }
 
+#pragma mark - CRUD operation
+
+- (void)insertNewDocument:(void (^)(CNNoteDocument *))completion
+{
+    NSString * documentName = [self generateRadomFileName];
+    
+    [self retrieveIcloudContainerURL:^(NSURL *urlForIcloudContainer) {
+        
+        NSURL * fileURL = [urlForIcloudContainer URLByAppendingPathComponent:documentName
+                                                                 isDirectory:NO];
+        
+        id document = [[CNNoteDocument alloc]initWithFileURL:fileURL];
+        
+        [document saveToURL:fileURL
+           forSaveOperation:UIDocumentSaveForCreating
+          completionHandler:^(BOOL success) {
+              completion(document);
+          }];
+    }];
+    
+}
+
 #pragma mark - helper
 
 - (void) retrieveIcloudContainerURL:(void(^)(NSURL * urlForIcloudContainer))completion

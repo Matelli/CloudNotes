@@ -10,6 +10,9 @@
 #import "CNNoteDocument.h"
 
 @implementation CNCloudHelper
+{
+    NSMetadataQuery * _query;
+}
 
 + (instancetype)sharedInstance
 {
@@ -65,6 +68,30 @@
     }];
     
 }
+
+#pragma mark - monitoriung cloud acitivties
+
+- (NSMetadataQuery *)documentQuery
+{
+    
+    if(!_query)
+    {
+        _query = [[NSMetadataQuery alloc] init];
+        
+        // Search documents subdir only
+        [_query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
+        
+        // Recherche tout les documents .not
+        NSString * filePattern = @"*.not";
+        [_query setPredicate:[NSPredicate predicateWithFormat:@"%K LIKE %@",
+                                      NSMetadataItemFSNameKey, filePattern]];
+        
+    }
+    return _query;
+    
+}
+
+
 
 #pragma mark - helper
 

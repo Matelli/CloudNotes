@@ -1,0 +1,453 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C6171A7199251E4000E9B50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6171A6199251E4000E9B50 /* Foundation.framework */; };
+		0C6171A9199251E4000E9B50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6171A8199251E4000E9B50 /* CoreGraphics.framework */; };
+		0C6171AB199251E4000E9B50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6171AA199251E4000E9B50 /* UIKit.framework */; };
+		0C6171B1199251E4000E9B50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C6171AF199251E4000E9B50 /* InfoPlist.strings */; };
+		0C6171B3199251E4000E9B50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6171B2199251E4000E9B50 /* main.m */; };
+		0C6171B7199251E4000E9B50 /* CNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6171B6199251E4000E9B50 /* CNAppDelegate.m */; };
+		0C6171B9199251E4000E9B50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6171B8199251E4000E9B50 /* Images.xcassets */; };
+		0C6171C0199251E4000E9B50 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6171BF199251E4000E9B50 /* XCTest.framework */; };
+		0C6171C1199251E4000E9B50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6171A6199251E4000E9B50 /* Foundation.framework */; };
+		0C6171C2199251E4000E9B50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6171AA199251E4000E9B50 /* UIKit.framework */; };
+		0C6171CA199251E4000E9B50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C6171C8199251E4000E9B50 /* InfoPlist.strings */; };
+		0C6171CC199251E4000E9B50 /* CloudNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6171CB199251E4000E9B50 /* CloudNotesTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0C6171C3199251E4000E9B50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C61719B199251E4000E9B50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C6171A2199251E4000E9B50;
+			remoteInfo = CloudNotes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C6171A3199251E4000E9B50 /* CloudNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C6171A6199251E4000E9B50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0C6171A8199251E4000E9B50 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0C6171AA199251E4000E9B50 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0C6171AE199251E4000E9B50 /* CloudNotes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CloudNotes-Info.plist"; sourceTree = "<group>"; };
+		0C6171B0199251E4000E9B50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C6171B2199251E4000E9B50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0C6171B4199251E4000E9B50 /* CloudNotes-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudNotes-Prefix.pch"; sourceTree = "<group>"; };
+		0C6171B5199251E4000E9B50 /* CNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNAppDelegate.h; sourceTree = "<group>"; };
+		0C6171B6199251E4000E9B50 /* CNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNAppDelegate.m; sourceTree = "<group>"; };
+		0C6171B8199251E4000E9B50 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0C6171BE199251E4000E9B50 /* CloudNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C6171BF199251E4000E9B50 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		0C6171C7199251E4000E9B50 /* CloudNotesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CloudNotesTests-Info.plist"; sourceTree = "<group>"; };
+		0C6171C9199251E4000E9B50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C6171CB199251E4000E9B50 /* CloudNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudNotesTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0C6171A0199251E4000E9B50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6171A9199251E4000E9B50 /* CoreGraphics.framework in Frameworks */,
+				0C6171AB199251E4000E9B50 /* UIKit.framework in Frameworks */,
+				0C6171A7199251E4000E9B50 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C6171BB199251E4000E9B50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6171C0199251E4000E9B50 /* XCTest.framework in Frameworks */,
+				0C6171C2199251E4000E9B50 /* UIKit.framework in Frameworks */,
+				0C6171C1199251E4000E9B50 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C61719A199251E4000E9B50 = {
+			isa = PBXGroup;
+			children = (
+				0C6171AC199251E4000E9B50 /* CloudNotes */,
+				0C6171C5199251E4000E9B50 /* CloudNotesTests */,
+				0C6171A5199251E4000E9B50 /* Frameworks */,
+				0C6171A4199251E4000E9B50 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0C6171A4199251E4000E9B50 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C6171A3199251E4000E9B50 /* CloudNotes.app */,
+				0C6171BE199251E4000E9B50 /* CloudNotesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0C6171A5199251E4000E9B50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C6171A6199251E4000E9B50 /* Foundation.framework */,
+				0C6171A8199251E4000E9B50 /* CoreGraphics.framework */,
+				0C6171AA199251E4000E9B50 /* UIKit.framework */,
+				0C6171BF199251E4000E9B50 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0C6171AC199251E4000E9B50 /* CloudNotes */ = {
+			isa = PBXGroup;
+			children = (
+				0C6171B5199251E4000E9B50 /* CNAppDelegate.h */,
+				0C6171B6199251E4000E9B50 /* CNAppDelegate.m */,
+				0C6171B8199251E4000E9B50 /* Images.xcassets */,
+				0C6171AD199251E4000E9B50 /* Supporting Files */,
+			);
+			path = CloudNotes;
+			sourceTree = "<group>";
+		};
+		0C6171AD199251E4000E9B50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C6171AE199251E4000E9B50 /* CloudNotes-Info.plist */,
+				0C6171AF199251E4000E9B50 /* InfoPlist.strings */,
+				0C6171B2199251E4000E9B50 /* main.m */,
+				0C6171B4199251E4000E9B50 /* CloudNotes-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C6171C5199251E4000E9B50 /* CloudNotesTests */ = {
+			isa = PBXGroup;
+			children = (
+				0C6171CB199251E4000E9B50 /* CloudNotesTests.m */,
+				0C6171C6199251E4000E9B50 /* Supporting Files */,
+			);
+			path = CloudNotesTests;
+			sourceTree = "<group>";
+		};
+		0C6171C6199251E4000E9B50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C6171C7199251E4000E9B50 /* CloudNotesTests-Info.plist */,
+				0C6171C8199251E4000E9B50 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0C6171A2199251E4000E9B50 /* CloudNotes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C6171CF199251E4000E9B50 /* Build configuration list for PBXNativeTarget "CloudNotes" */;
+			buildPhases = (
+				0C61719F199251E4000E9B50 /* Sources */,
+				0C6171A0199251E4000E9B50 /* Frameworks */,
+				0C6171A1199251E4000E9B50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CloudNotes;
+			productName = CloudNotes;
+			productReference = 0C6171A3199251E4000E9B50 /* CloudNotes.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0C6171BD199251E4000E9B50 /* CloudNotesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C6171D2199251E4000E9B50 /* Build configuration list for PBXNativeTarget "CloudNotesTests" */;
+			buildPhases = (
+				0C6171BA199251E4000E9B50 /* Sources */,
+				0C6171BB199251E4000E9B50 /* Frameworks */,
+				0C6171BC199251E4000E9B50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0C6171C4199251E4000E9B50 /* PBXTargetDependency */,
+			);
+			name = CloudNotesTests;
+			productName = CloudNotesTests;
+			productReference = 0C6171BE199251E4000E9B50 /* CloudNotesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0C61719B199251E4000E9B50 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CN;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Mistra;
+				TargetAttributes = {
+					0C6171BD199251E4000E9B50 = {
+						TestTargetID = 0C6171A2199251E4000E9B50;
+					};
+				};
+			};
+			buildConfigurationList = 0C61719E199251E4000E9B50 /* Build configuration list for PBXProject "CloudNotes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0C61719A199251E4000E9B50;
+			productRefGroup = 0C6171A4199251E4000E9B50 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0C6171A2199251E4000E9B50 /* CloudNotes */,
+				0C6171BD199251E4000E9B50 /* CloudNotesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0C6171A1199251E4000E9B50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6171B1199251E4000E9B50 /* InfoPlist.strings in Resources */,
+				0C6171B9199251E4000E9B50 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C6171BC199251E4000E9B50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6171CA199251E4000E9B50 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0C61719F199251E4000E9B50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6171B3199251E4000E9B50 /* main.m in Sources */,
+				0C6171B7199251E4000E9B50 /* CNAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C6171BA199251E4000E9B50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6171CC199251E4000E9B50 /* CloudNotesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0C6171C4199251E4000E9B50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C6171A2199251E4000E9B50 /* CloudNotes */;
+			targetProxy = 0C6171C3199251E4000E9B50 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0C6171AF199251E4000E9B50 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C6171B0199251E4000E9B50 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0C6171C8199251E4000E9B50 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C6171C9199251E4000E9B50 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0C6171CD199251E4000E9B50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0C6171CE199251E4000E9B50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0C6171D0199251E4000E9B50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudNotes/CloudNotes-Prefix.pch";
+				INFOPLIST_FILE = "CloudNotes/CloudNotes-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0C6171D1199251E4000E9B50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudNotes/CloudNotes-Prefix.pch";
+				INFOPLIST_FILE = "CloudNotes/CloudNotes-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		0C6171D3199251E4000E9B50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CloudNotes.app/CloudNotes";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudNotes/CloudNotes-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CloudNotesTests/CloudNotesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		0C6171D4199251E4000E9B50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CloudNotes.app/CloudNotes";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudNotes/CloudNotes-Prefix.pch";
+				INFOPLIST_FILE = "CloudNotesTests/CloudNotesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0C61719E199251E4000E9B50 /* Build configuration list for PBXProject "CloudNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C6171CD199251E4000E9B50 /* Debug */,
+				0C6171CE199251E4000E9B50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C6171CF199251E4000E9B50 /* Build configuration list for PBXNativeTarget "CloudNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C6171D0199251E4000E9B50 /* Debug */,
+				0C6171D1199251E4000E9B50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0C6171D2199251E4000E9B50 /* Build configuration list for PBXNativeTarget "CloudNotesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C6171D3199251E4000E9B50 /* Debug */,
+				0C6171D4199251E4000E9B50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0C61719B199251E4000E9B50 /* Project object */;
+}

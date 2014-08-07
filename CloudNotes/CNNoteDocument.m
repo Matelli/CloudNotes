@@ -19,16 +19,17 @@
     id serializedObject = [NSJSONSerialization JSONObjectWithData:contents
                                                           options:NSJSONReadingAllowFragments
                                                             error:outError];
+    
     self.text = serializedObject[CNNoteDocumentSerializedText];
+    
+    // Recupération de la date
     NSNumber * timeStamp = serializedObject[CNNoteDocumentSerializedTimeStamp];
     self.lastModified = [NSDate dateWithTimeIntervalSince1970:timeStamp.doubleValue];
     
-    if(self.text == nil)
-    {
-        self.text = @"vide";
-    }
     return outError == nil;
 }
+
+
 
 // ecriture
 - (id)contentsForType:(NSString *)typeName error:(NSError *__autoreleasing *)outError
@@ -48,12 +49,16 @@
                                         };
     
     id serializedData = [NSJSONSerialization dataWithJSONObject:serializedObject
-                                                        options:NSJSONWritingPrettyPrinted
+                                                        options:0
                                                           error:outError];
     
     return serializedData;
     
 }
+
+
+
+
 
 - (NSString *)description
 {

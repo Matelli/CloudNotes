@@ -63,11 +63,11 @@
 {
     NSString * documentName = [self generateRadomFileName];
     
-    NSLog(@"Trying to create %@", documentName);
-    
-    [self retrieveIcloudContainerURL:^(NSURL *urlForIcloudContainer) {
+    [self retrieveIcloudContainerURL:^(NSURL *urlForIcloudContainer)
+    {
         
         NSURL * fileURL = [urlForIcloudContainer URLByAppendingPathComponent:@"Documents"];
+        
         fileURL = [fileURL URLByAppendingPathComponent:documentName];
         
         id document = [[CNNoteDocument alloc]initWithFileURL:fileURL];
@@ -76,12 +76,8 @@
            forSaveOperation:UIDocumentSaveForCreating
           completionHandler:^(BOOL success) {
               
-              [document openWithCompletionHandler:^(BOOL success) {
-                  if(success)
-                  {
-                      completion(document);
-                  }
-              }];
+              completion(document);
+              
           }];
     }];
     
@@ -117,12 +113,9 @@
 
 - (void) stopMonitoringCloud
 {
-    if(_query)
-    {
-        [self.query disableUpdates];
-        [self.query stopQuery];
-        self.query = nil;
-    }
+    [self.query disableUpdates];
+    [self.query stopQuery];
+    self.query = nil;
 }
 
 #pragma mark - iCloud CallBack
@@ -130,7 +123,8 @@
 - (void) queryDidFinishGathering
 {
     NSMutableArray * documents = [[NSMutableArray alloc]init];
-    for (NSMetadataItem * item in _query.results)
+    
+    for (NSMetadataItem * item in self.query.results)
     {
         NSURL *url = [item valueForAttribute:NSMetadataItemURLKey];
         CNNoteDocument *doc = [[CNNoteDocument alloc] initWithFileURL:url];
@@ -145,9 +139,11 @@
 
 - (void) retrieveIcloudContainerURL:(void(^)(NSURL * urlForIcloudContainer))completion
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
         id manager = [NSFileManager defaultManager];
         NSURL * container = [manager URLForUbiquityContainerIdentifier:nil];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             
             if(completion)
@@ -182,8 +178,8 @@
 
 - (void) setStoredToken:(id)token
 {
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:kIcloudServiceTokenStorage];
     [[NSUserDefaults standardUserDefaults]setObject:token forKey:kIcloudServiceTokenStorage];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 

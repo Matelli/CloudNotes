@@ -13,7 +13,8 @@
 @interface CNNotesTableViewController () <CNCloudHelperDelegate>
 
 @property (strong, nonatomic) NSArray * notesDocuments;
-@property (readonly) CNCloudHelper * service;
+@property (readonly, nonatomic) CNCloudHelper * service;
+@property (strong, nonatomic) NSMutableDictionary * openOperations;
 
 @end
 
@@ -38,15 +39,29 @@
     return _notesDocuments;
 }
 
+- (NSMutableDictionary *)openOperations
+{
+    if(!_openOperations)
+    {
+        _openOperations = [NSMutableDictionary new];
+    }
+    return _openOperations;
+}
+
 #pragma mark - View LifeCycle
 
 - (void)viewDidLoad
 {
-    _openOperations  = [NSMutableDictionary new];
-    
+    // Ajoute un bouton +
     UIBarButtonItem * insertButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewNote)];
     self.navigationItem.rightBarButtonItem = insertButton;
     
+    [self launchIcloudSync];
+ 
+}
+
+- (void) launchIcloudSync
+{
     [self.service retrieveUserAccountToken:^(BOOL hasAccount, BOOL accountHasChanged) {
         if(hasAccount)
         {
@@ -60,19 +75,22 @@
                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
         }
     }];
-    
-    
-    
+
 }
 
 #pragma mark - user Interraction
 
 - (void) insertNewNote
 {
-    [self.service insertNewDocument:^(CNNoteDocument * document) {
+    [self.service insertNewDocument:^(CNNoteDocument * document)
+    {
         document.text = @"new";
         document.lastModified = [NSDate date];
+       
         self.notesDocuments = [self.notesDocuments arrayByAddingObject:document];
+        
+        self.notesDocuments = [self.notesDocuments sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastModified" ascending:NO]]];
+        
         [self.tableView reloadData];
     }];
 }
@@ -122,23 +140,32 @@
 
 - (void) openDocumentForCellAtIndexPath:(NSIndexPath *)indexPAth
 {
+    if(self.openOperations[indexPAth] != nil)
+    {
+        // Already performing
+        return;
+    }
+    
     CNNoteDocument * document = self.notesDocuments[indexPAth.row];
     
-    NSBlockOperation * operation = [NSBlockOperation blockOperationWithBlock:^{
-        UITableViewCell * visibleCell = [self.tableView cellForRowAtIndexPath:indexPAth];
-        visibleCell.textLabel.text = document.text;
-        [visibleCell setNeedsLayout];
-        [_openOperations removeObjectForKey:indexPAth];
+    NSBlockOperation * operation = [NSBlockOperation blockOperationWithBlock:^
+    {
+        [self.tableView reloadRowsAtIndexPaths:@[indexPAth]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [self.openOperations removeObjectForKey:indexPAth];
     }];
-    _openOperations[indexPAth] = operation;
     
-    [document openWithCompletionHandler:^(BOOL success) {
+    self.openOperations[indexPAth] = operation;
+    
+    [document openWithCompletionHandler:^(BOOL success)
+    {
         [[NSOperationQueue mainQueue]addOperation:operation];
     }];
 }
 
 
-NSIndexPath * _ip;
+NSIndexPath * _ip; // Stocke l'indexPath de la cellule en cours d'édition
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -146,6 +173,7 @@ NSIndexPath * _ip;
     
     CNNoteDocument * doc = self.notesDocuments[indexPath.row];
     
+    // Cree une alertView pour modifier le text
     UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Entrer le text" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [[alert textFieldAtIndex:0] setText:doc.text];
@@ -159,10 +187,23 @@ NSIndexPath * _ip;
     
     if(buttonIndex != alertView.cancelButtonIndex)
     {
+        // Modifie le text et le lastModified
         doc.text = [[alertView textFieldAtIndex:0] text];
+        doc.lastModified = [NSDate date];
+        
+        // Sauvegarde du document
         [doc saveToURL:doc.fileURL
-       forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+       forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success)
+        {
+            // Met a jour la cellule
            [self.tableView reloadRowsAtIndexPaths:@[_ip] withRowAnimation:UITableViewRowAnimationNone];
+            
+            // déplace la cellule en haut de liste
+           [self.tableView moveRowAtIndexPath:_ip toIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            
+            // Retrie la datasource
+           self.notesDocuments = [self.notesDocuments sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastModified" ascending:NO]]];
+            
            _ip = nil;
        }];
         
@@ -175,6 +216,9 @@ NSIndexPath * _ip;
 {
     self.notesDocuments = documents;
     
+    self.notesDocuments = [self.notesDocuments sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastModified" ascending:NO]]];
+    
     [self.tableView reloadData];
 }
+
 @end
